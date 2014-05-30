@@ -7,11 +7,23 @@ import java.util.Date;
  */
 public class CaseBean {
 
+    public enum CaseStatus {
+        ACTIVE, EMERGENCY, CLOSED
+    }
+
     private long id;
-    private String caseTitle;
-    private String caseOwner;
-    private Date caseCreated;
-    private Date caseClosed;
+    private String title;
+    private String owner;
+    private Date dateCreated;
+    private Date dateClosed;
+    private String status;
+    private String comments;
+    private double latitude;
+    private double longitude;
+//    private GeoPt geoPt;
+
+
+
 
 
 
@@ -22,34 +34,73 @@ public class CaseBean {
         this.id = id;
     }
 
-    public String getCaseTitle() {
-        return caseTitle;
+    public String getTitle() {
+        return title;
     }
-    public void setCaseTitle(String data) {
-        caseTitle = data;
-    }
-
-    public String getCaseOwner() {
-        return caseOwner;
+    public void setTitle(String data) {
+        title = data;
     }
 
-    public void setCaseOwner(String caseOwner) {
-        this.caseOwner = caseOwner;
+    public String getOwner() {
+        return owner;
     }
 
-    public Date getCaseCreated() {
-        return caseCreated;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
-    public void setCaseCreated(Date caseCreated) {
-        this.caseCreated = caseCreated;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public Date getCaseClosed() {
-        return caseClosed;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public void setCaseClosed(Date caseClosed) {
-        this.caseClosed = caseClosed;
+    public Date getDateClosed() {
+        return dateClosed;
     }
+
+    public void setDateClosed(Date dateClosed) {
+        this.dateClosed = dateClosed;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+//    public GeoPt getGeoPt() {
+//        return geoPt;
+//    }
+//
+//    public void setGeoPt(GeoPt geoPt) {
+//        this.geoPt = geoPt;
+//    }
 }

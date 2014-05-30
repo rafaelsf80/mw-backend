@@ -23,17 +23,35 @@ import java.util.List;
 public class CaseEndpoint {
 
 
-    @ApiMethod(name = "storeCase")
-    public void storeCase(CaseBean caseBean) {
+    @ApiMethod(name = "updateCase")
+    public void updateCase(CaseBean caseBean) {
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
         Transaction txn = datastoreService.beginTransaction();
         try {
-            Key caseBeanParentKey = KeyFactory.createKey("CaseParent", "cases");
-            Entity caseEntity = new Entity("Case", caseBean.getId(), caseBeanParentKey);
-            caseEntity.setProperty("caseTitle", caseBean.getCaseTitle());
-            caseEntity.setProperty("caseOwner", caseBean.getCaseOwner());
-            caseEntity.setProperty("caseCreated", caseBean.getCaseCreated());
-            caseEntity.setProperty("caseClosed", caseBean.getCaseClosed());
+            //Key caseBeanParentKey = KeyFactory.createKey("CaseBeanParent", caseBean.getOwner());
+            //Entity caseEntity = new Entity("Case", caseBean.getId(), caseBeanParentKey);
+
+            Entity caseEntity;
+            if (caseBean.getId() == 0) {
+                //Each Case is a root identity (no parent), auto-assign ID.
+                caseEntity = new Entity("Case");
+
+            } else {
+                //This method of creating the Entity will simply overwrite the Entity in the datastore.
+                //If syncing is needed (rather than last-update-wins), need to check value in a transaction first.
+                Key caseKey = KeyFactory.createKey("Case", caseBean.getId());
+                caseEntity = new Entity(caseKey);
+            }
+
+            caseEntity.setProperty("title", caseBean.getTitle());
+            caseEntity.setProperty("owner", caseBean.getOwner());
+            caseEntity.setProperty("dateCreated", caseBean.getDateCreated());
+            caseEntity.setProperty("dateClosed", caseBean.getDateClosed());
+            caseEntity.setProperty("status", caseBean.getStatus());
+            caseEntity.setProperty("comments", caseBean.getComments());
+            caseEntity.setProperty("latitude", caseBean.getLatitude());
+            caseEntity.setProperty("longitude", caseBean.getLongitude());
+//            caseEntity.setProperty("geoPt", caseBean.getGeoPt());
             datastoreService.put(caseEntity);
             txn.commit();
         } finally {
@@ -45,47 +63,30 @@ public class CaseEndpoint {
     @ApiMethod(name = "getCase")
     public CaseBean getCase(@Named("id") long id) {
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
-        Key caseBeanParentKey = KeyFactory.createKey("CaseBeanParent", "cases");
 
         Key caseKey = KeyFactory.createKey("Case", id);
-        Entity result = null;
+        Entity caseEntity = null;
         try {
-            result = datastoreService.get(caseKey);
+            caseEntity = datastoreService.get(caseKey);
         } catch (EntityNotFoundException e) {
             e.printStackTrace();
         }
 
-        CaseBean caseBean = new CaseBean();
-//        caseBean.setId(result.getKey().getId());
-//        caseBean.setCaseTitle((String) result.getProperty("caseTitle"));
-//        caseBean.setCaseOwner((String) result.getProperty("caseOwner"));
-//        caseBean.setCaseCreated((Date) result.getProperty("caseCreated"));
-//        caseBean.setCaseClosed((Date) result.getProperty("caseClosed"));
+        //Entity result2 = datastoreService.get(id);
 
-        caseBean.setId(id);
-        caseBean.setCaseTitle("Feed the cat");
-        caseBean.setCaseOwner("Matt");
-        //caseBean.setCaseCreated();
-        //caseBean.setCaseClosed();
-
-
+        CaseBean caseBean = convertEntitytoBean(caseEntity);
         return caseBean;
     }
 
     @ApiMethod(name = "getAllCases")
     public List<CaseBean> getAllCases() {
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
-        Key caseBeanParentKey = KeyFactory.createKey("CaseBeanParent", "cases");
-        Query query = new Query(caseBeanParentKey);
+        Query query = new Query("Case");
         List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
         ArrayList<CaseBean> caseBeans = new ArrayList<CaseBean>();
         for (Entity result : results) {
-            CaseBean caseBean = new CaseBean();
-            caseBean.setId(result.getKey().getId());
-            caseBean.setCaseTitle((String) result.getProperty("caseTitle"));
-            caseBean.setCaseOwner((String) result.getProperty("caseOwner"));
-            caseBean.setCaseCreated((Date) result.getProperty("caseCreated"));
-            caseBean.setCaseClosed((Date) result.getProperty("caseClosed"));
+            CaseBean caseBean = convertEntitytoBean(result);
+
             caseBeans.add(caseBean);
         }
 
@@ -93,24 +94,18 @@ public class CaseEndpoint {
     }
 
     @ApiMethod(name = "getMyCases")
-    public List<CaseBean> getMyCases(@Named("caseOwner") String caseOwner) {
+    public List<CaseBean> getMyCases(@Named("owner") String owner) {
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
-        //Key caseBeanParentKey = KeyFactory.createKey("CaseBeanParent", "cases");
         Query query = new Query("Case");
-        Query.Filter ownerFilter = new Query.FilterPredicate("caseOwner", Query.FilterOperator.EQUAL,
-                caseOwner);
+        Query.Filter ownerFilter = new Query.FilterPredicate("owner", Query.FilterOperator.EQUAL,
+                owner);
         //Query.Filter statusFilter = new Query.FilterPredicate();
         //Query.Filter comboFilter = CompositeFilterOperator.and(ownerFilter, statusFilter);
         query.setFilter(ownerFilter);
         List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
         ArrayList<CaseBean> caseBeans = new ArrayList<CaseBean>();
         for (Entity result : results) {
-            CaseBean caseBean = new CaseBean();
-            caseBean.setId(result.getKey().getId());
-            caseBean.setCaseTitle((String) result.getProperty("caseTitle"));
-            caseBean.setCaseOwner((String) result.getProperty("caseOwner"));
-            caseBean.setCaseCreated((Date) result.getProperty("caseCreated"));
-            caseBean.setCaseClosed((Date) result.getProperty("caseClosed"));
+            CaseBean caseBean = convertEntitytoBean(result);
             caseBeans.add(caseBean);
         }
 
@@ -120,6 +115,18 @@ public class CaseEndpoint {
 
     @ApiMethod(name = "deleteCase")
     public void deleteCase(@Named("id") long id) {
+        Key caseKey = KeyFactory.createKey("Case", id);
+        DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
+        Transaction txn = datastoreService.beginTransaction();
+        try {
+            //not checking if it exists, just deleting.
+            datastoreService.delete(caseKey);
+            txn.commit();
+        } finally {
+            if (txn.isActive()) {
+                txn.rollback();
+            }
+        }
 
     }
 
@@ -129,8 +136,7 @@ public class CaseEndpoint {
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
         Transaction txn = datastoreService.beginTransaction();
         try {
-            Key caseBeanParentKey = KeyFactory.createKey("CaseBeanParent", "cases");
-            Query query = new Query(caseBeanParentKey);
+            Query query = new Query("Case");
             List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
             for (Entity result : results) {
                 datastoreService.delete(result.getKey());
@@ -140,6 +146,35 @@ public class CaseEndpoint {
             if (txn.isActive()) {
                 txn.rollback();
             }
+        }
+    }
+
+    private CaseBean convertEntitytoBean(Entity caseEntity) {
+        //todo: need some validation / protection in case of null values.
+        CaseBean caseBean = new CaseBean();
+        caseBean.setId(caseEntity.getKey().getId());
+        caseBean.setTitle(getNullSafeString(caseEntity.getProperty("title")));
+        caseBean.setOwner(getNullSafeString(caseEntity.getProperty("owner")));
+        caseBean.setDateCreated((Date) caseEntity.getProperty("caseCreated"));
+        caseBean.setDateClosed((Date) caseEntity.getProperty("caseClosed"));
+        //caseBean.setStatus((CaseBean.CaseStatus) caseEntity.getProperty("status").toString());
+        caseBean.setStatus(getNullSafeString(caseEntity.getProperty("status")));
+        caseBean.setComments(getNullSafeString(caseEntity.getProperty("comments")));
+        caseBean.setLatitude((Double) caseEntity.getProperty("latitude"));
+        caseBean.setLongitude((Double) caseEntity.getProperty("longitude"));
+//        GeoPt geoPt = new GeoPt((Float) caseEntity.getProperty("latitude"), (Float) caseEntity.getProperty("longitude"));
+//        caseBean.setGeoPt(geoPt);
+
+
+        return caseBean;
+    }
+    private String getNullSafeString (Object o) {
+        if (o == null)
+        {
+            return null;
+        }
+        else {
+            return o.toString();
         }
     }
 
