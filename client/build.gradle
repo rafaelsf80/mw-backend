@@ -1,0 +1,41 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+
+repositories{
+    mavenLocal()
+}
+
+
+dependencies {
+
+    compile ('com.google.mw.backend:caseApi:v1-1.18.0-rc-SNAPSHOT') {
+        exclude (group: 'org.apache.httpcomponents', module: 'httpclient')
+    }
+
+    compile ('com.google.http-client:google-http-client-android:1.18.0-rc') {
+        exclude (group: 'com.google.android', module: 'android')
+        exclude (group: 'org.apache.httpcomponents', module: 'httpclient')
+    }
+
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.google.android.gms:play-services:4.4.52'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

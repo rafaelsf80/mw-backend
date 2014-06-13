@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ACME Mobile</string>
+    <string name="action_settings">Settings</string>
+    <string name="tvICRegistrationDashboardText">ACME Cases Dashboard</string>
+    <string name="etFirstNameHint">Enter your first Name</string>
+    <string name="etLastNameHint">Enter your last Name</string>
+    <string name="etPasswordHint">Set your Password</string>
+    <string name="spPrompt">Select segment</string>
+    <string name="btRegisterText">Register</string>
+    <string name="loginOk">User registered successfully</string>
+    <string name="loginFailed">Oops, there was an issue!</string>
+    <string name="registerTitle">Getting All Cases</string>
+    <string name="registerMessage">Please, wait. This takes some seconds ...</string>
+    
+    <string name="loginEmptyFields">Some fields are empty</string>
+    <string name="loginWeakPassword">Password min 8 chars; mix numbers/chars</string>
+    
+    <string name="pleaseWait">Please, wait</string>
+    <string name="loadingFields">Loading fields and initializing</string>
+
+    <!-- NetworkActivity -->
+    <string name="status_connectivity_OK">Network status : CONNECTED</string>
+    <string name="status_connectivity_NOK">Network status : DISCONNECTED</string>
+    <string name="status_message_default">Network status : NONE</string>
+    <string name="status_message_preferences"> For a better experience, we recommand you \n to set the WIFI as preferred connection.</string>
+    <string name="status_message_error"> Your device is not connected to any network.\n Please connect to GoogleGuest Wifi network.</string>
+    <string name="status_message_successWIFI"> Your device is connected to the Wifi network.</string>
+    <string name="status_message_successMobile"> For a better experience, we recommand you \n to connect to GoogleGuest Wifi network.</string>
+
+    <!-- Error Message -->
+    <string name="error_empty_fields">You forgot to fill one of the fields</string>
+    <string name="error_no_network">You are not connected</string>
+
+
+    <!-- About -->
+    <string name="title_activity_about">About</string>
+    <string name="about_title">ACME Mobile</string>
+    <string name="about_text">Case Management Mobile application </string>
+    
+    <string name="about_link_text">Extend the MDM experience!</string>
+    <string name="about_site_btn">Website</string>
+    <string name="about_site_URL">https://support.google.com/a/answer/1734200?hl=en</string>
+    
+    <string name="about_email_text">Any suggestions or comments? </string>
+    <string name="about_email_btn">Contact</string>
+    <string name="about_email_contact">contact_acme@google.com</string>
+    <string name="about_email_subject">ACME issues</string>
+    <string name="about_email_content">Type in your suggestions or comments</string>
+    
+    <string name="desc">icone profil</string>
+    
+    
+</resources>

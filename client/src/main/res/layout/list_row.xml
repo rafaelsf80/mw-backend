@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector"
+    android:orientation="horizontal"
+    android:padding="10dip" >
+
+    <!-- ListRow Left side Thumbnail image -->
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip" >
+
+        <ImageView
+            android:id="@+id/im_status_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/profile_icon_without_img" />
+    </LinearLayout>
+
+    <!-- Name Expert -->
+
+    <!-- Artist Name -->
+
+    <TextView
+        android:id="@+id/tv_list_case_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_list_created_date"
+        android:layout_alignTop="@+id/thumbnail"
+        android:text="Case title"
+        android:textColor="@color/text"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_list_created_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_list_case_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Date created"
+        android:textColor="@color/text"
+        android:textSize="15sp" />
+
+
+
+
+    <!-- Rightend Arrow -->
+
+    <!-- BookMark -->
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignRight="@+id/tv_list_created_date"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_cross" />
+
+
+
+    <!--
+        <ImageView
+            android:id="@+id/bookmark_state"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignTop="@+id/thumbnail"
+            android:layout_marginRight="18dp"
+            android:layout_toLeftOf="@+id/imageView1"
+            android:src="@drawable/icon_bookmark"
+            android:onClick="searchBookmarked" />
+     -->
+
+
+
+</RelativeLayout>

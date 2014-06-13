@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/back_ground"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/ll_case_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <!-- Team -->
+
+            <LinearLayout
+                android:id="@+id/team"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/description"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_case_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="20dp"
+                        android:text="Case description"
+                        android:textColor="@color/text"
+                        android:textSize="20sp" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/text"
+                    android:gravity="center_horizontal" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp" >
+
+                    <RelativeLayout
+                        android:id="@+id/case_title_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_case_title_label"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Title"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_case_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/tv_case_title_label"
+                            android:text="Case title"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/owner_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_owner_label"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Owner"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_owner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/tv_owner_label"
+                            android:text="Owner title"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/created_date_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_created_date_label"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Case created"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_created_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/tv_created_date_label"
+                            android:text="Case created text"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/closed_date_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_closed_date_label"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Case closed"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/tv_closed_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/tv_closed_date_label"
+                            android:text="Case closed text"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/status_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_status_label"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Status"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/tv_status_label"
+                            android:text="Case status text"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/comments_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_comments_label"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Comments"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_comments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/tv_comments_label"
+                            android:text="8,rue de Londres - Paris"
+                            android:textColor="@color/text_dark"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/bt_update_case"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:background="@color/text"
+                    android:text="Update case"
+                    android:textColor="#ffffff"
+                    android:textColorHint="@color/text" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

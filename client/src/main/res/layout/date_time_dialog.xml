@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/date_time_dialog_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/time_picker_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true" >
+
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/date_picker_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true" >
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:calendarViewShown="false"
+        	android:spinnersShown="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date_picker_layout"
+        android:padding="5dip" >
+
+        <Button
+            android:id="@+id/bt_set_date_time"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@android:string/ok" />
+
+        <Button
+            android:id="@+id/bt_reset_date_time"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reset" />
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@android:string/cancel" />
+    </LinearLayout>
+
+</LinearLayout>
