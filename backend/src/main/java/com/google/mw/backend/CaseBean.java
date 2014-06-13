@@ -1,4 +1,4 @@
-package backend;
+package com.google.mw.backend;
 
 import java.util.Date;
 
@@ -20,12 +20,21 @@ public class CaseBean {
     private String comments;
     private double latitude;
     private double longitude;
+
+    //need to establish rules for when to mark notificationSent true or false.
+    //presumably, tasks created by Mobile don't need a notification.
+    //Tasks set to Urgent by the web client should definitely send notification.
+    private Boolean notificationNeeded;
 //    private GeoPt geoPt;
 
 
+    public Boolean getNotificationNeeded() {
+        return notificationNeeded;
+    }
 
-
-
+    public void setNotificationNeeded(Boolean notificationNeeded) {
+        this.notificationNeeded = notificationNeeded;
+    }
 
     public long getId() {
         return id;
