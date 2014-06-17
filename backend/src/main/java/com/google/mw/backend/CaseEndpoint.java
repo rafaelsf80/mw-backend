@@ -45,6 +45,11 @@ public class CaseEndpoint {
             }
 
             caseEntity.setProperty("title", caseBean.getTitle());
+            if (caseBean.getOwner() == null) {
+                caseEntity.setProperty("owner", "No Owner Set");
+            } else {
+                caseEntity.setProperty("owner", caseBean.getOwner());
+            }
             caseEntity.setProperty("owner", caseBean.getOwner());
             if (caseBean.getDateCreated()==null) {
                 caseEntity.setProperty("dateCreated", new Date());
