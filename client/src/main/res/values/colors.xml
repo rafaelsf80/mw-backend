@@ -24,15 +24,15 @@
     <color name="text_btn">#FFFFFF</color>
     <color name="text_error">#FF0000</color>
     <color name="text_dark">#464648</color>
-
+    
     <color name="bg">#DEDEDE</color>
     <color name="bg_dark">#686868</color>
     <color name="bg_form">#FFFFFF</color>
-
+    
     <color name="red_color">#d84437</color>
     <color name="yellow_color">#f4b400</color>
     <color name="green_color">#0f9d58</color>
-
+    
     <color name="back_ground">#F0F0EF</color>
 
 </resources>

@@ -47,7 +47,7 @@
                         android:textColor="@color/text"
                         android:textSize="20sp" />
 
-
+                   
                 </RelativeLayout>
 
                 <TextView
@@ -111,7 +111,7 @@
                             android:textColor="@color/text_dark"
                             android:textSize="15sp" />
                     </RelativeLayout>
-
+                    
                     <RelativeLayout
                         android:id="@+id/created_date_layout"
                         android:layout_width="fill_parent"
@@ -136,7 +136,7 @@
                             android:textColor="@color/text_dark"
                             android:textSize="15sp" />
                     </RelativeLayout>
-
+                    
                     <RelativeLayout
                         android:id="@+id/closed_date_layout"
                         android:layout_width="fill_parent"
@@ -161,7 +161,7 @@
                             android:textColor="@color/text_dark"
                             android:textSize="15sp" />
                     </RelativeLayout>
-
+                    
                     <RelativeLayout
                         android:id="@+id/status_layout"
                         android:layout_width="fill_parent"
@@ -202,7 +202,7 @@
                             android:textColor="@color/text"
                             android:textSize="15sp" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/tv_comments"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="100dp"
                     android:background="@color/text"
-                    android:text="Update case"
+                    android:text="Close case"
                     android:textColor="#ffffff"
                     android:textColorHint="@color/text" />
             </LinearLayout>

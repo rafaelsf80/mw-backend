@@ -1,4 +1,4 @@
-package es.rafaelsf80.apps.semobiletraining;
+package com.google.mw.android.app;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -18,13 +18,13 @@ import android.util.Log;
  */
 
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
-
-    private final String TAG = getClass().getSimpleName();
+	
+	private final String TAG = getClass().getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        Log.i(TAG, "onReceive BroadcastReceiver");
+    	
+    	Log.i(TAG, "onReceive BroadcastReceiver"); 
         // Explicitly specify that GcmIntentService will handle the intent.
         ComponentName comp = new ComponentName(context.getPackageName(),
                 GcmIntentService.class.getName());
@@ -33,3 +33,4 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
         setResultCode(Activity.RESULT_OK);
     }
 }
+

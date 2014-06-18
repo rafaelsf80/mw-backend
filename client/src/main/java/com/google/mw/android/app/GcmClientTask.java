@@ -1,9 +1,4 @@
-package es.rafaelsf80.apps.semobiletraining;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.concurrent.atomic.AtomicInteger;
+package com.google.mw.android.app;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,14 +6,14 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class GcmClientTask {
@@ -38,30 +33,30 @@ public class GcmClientTask {
      * Tag used on log messages.
      */
     private final String TAG = getClass().getSimpleName();
-
+  
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
     Context mContext;
 
     String regid = null;
-
+    
     public void setContext(Context ctx) {
-        mContext = ctx;
-    }
-
+		mContext = ctx;
+	}
+	
     public void start() {
 
-        // Check device for Play Services APK. If check succeeds, proceed with GCM registration.
-        if (checkPlayServices()) {
-            gcm = GoogleCloudMessaging.getInstance( mContext );
-            regid = getRegistrationId( mContext);
-            if (regid.isEmpty())
-                registerInBackground();
-            else
-                Log.i(TAG, "Already registered on GCM");
-        } else {
-            Log.i(TAG, "No valid Google Play Services APK found.");
-        }
+    	// Check device for Play Services APK. If check succeeds, proceed with GCM registration.
+    	if (checkPlayServices()) {
+    		gcm = GoogleCloudMessaging.getInstance( mContext );
+    		regid = getRegistrationId( mContext);
+    		if (regid.isEmpty())
+    			registerInBackground(); 
+    		else
+    			Log.i(TAG, "Already registered on GCM");
+    	} else {
+    		Log.i(TAG, "No valid Google Play Services APK found.");
+    	}
     }
 
 
@@ -78,14 +73,14 @@ public class GcmClientTask {
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
                 Log.i(TAG, "This device is not supported.");
-
+               
             }
             return false;
         }
         return true;
     }
 
-
+   
     /**
      * Registers the application with GCM servers asynchronously.
      * <p>
@@ -101,16 +96,16 @@ public class GcmClientTask {
                     if (gcm == null) {
                         gcm = GoogleCloudMessaging.getInstance(mContext);
                     }
-                    regid = gcm.register(SENDER_ID);
+                    regid = gcm.register(SENDER_ID);                    
                     // Persist the regID - no need to register again.
-                    storeRegistrationId(mContext, regid);
+                    storeRegistrationId(mContext, regid);     
                     msg = "Device registered, registration ID=" + regid;
                 } catch (IOException ex) {
                     msg = "Error :" + ex.getMessage();
                     // If there is an error, don't just keep trying to register.
                     // Require the user to click a button again, or perform
                     // exponential back-off.
-
+                  
                 }
                 return msg;
             }
@@ -119,12 +114,12 @@ public class GcmClientTask {
             protected void onPostExecute(String msg) {
                 Log.d(TAG, msg + "\n");
                 SendRegistrationIdToBackend task = new SendRegistrationIdToBackend( );
-                task.setContext( mContext );
-                task.execute( regid );
+				task.setContext( mContext );
+				task.execute( regid );
             }
         }.execute(null, null, null);
     }
-
+    
     /**
      * Stores the registration ID and the app versionCode in the application's
      * {@code SharedPreferences}.
@@ -141,7 +136,7 @@ public class GcmClientTask {
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.commit();
     }
-
+    
     /**
      * Gets the current registration ID for application on GCM service, if there is one.
      * <p>
@@ -168,7 +163,7 @@ public class GcmClientTask {
         }
         return registrationId;
     }
-
+    
     /**
      * @return Application's version code from the {@code PackageManager}.
      */
