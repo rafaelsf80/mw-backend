@@ -29,8 +29,6 @@ public class CaseEndpoint {
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
         Transaction txn = datastoreService.beginTransaction();
         try {
-            //Key caseBeanParentKey = KeyFactory.createKey("CaseBeanParent", caseBean.getOwner());
-            //Entity caseEntity = new Entity("Case", caseBean.getId(), caseBeanParentKey);
 
             Entity caseEntity;
             if (caseBean.getId() == 0) {
@@ -85,8 +83,6 @@ public class CaseEndpoint {
             e.printStackTrace();
         }
 
-        //Entity result2 = datastoreService.get(id);
-
         CaseBean caseBean = convertEntitytoBean(caseEntity);
         return caseBean;
     }
@@ -112,8 +108,6 @@ public class CaseEndpoint {
         Query query = new Query("Case");
         Query.Filter ownerFilter = new Query.FilterPredicate("owner", Query.FilterOperator.EQUAL,
                 owner);
-        //Query.Filter statusFilter = new Query.FilterPredicate();
-        //Query.Filter comboFilter = CompositeFilterOperator.and(ownerFilter, statusFilter);
         query.setFilter(ownerFilter);
         List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
         ArrayList<CaseBean> caseBeans = new ArrayList<CaseBean>();
@@ -187,21 +181,16 @@ public class CaseEndpoint {
 
 
     private CaseBean convertEntitytoBean(Entity caseEntity) {
-        //todo: need some validation / protection in case of null values.
         CaseBean caseBean = new CaseBean();
         caseBean.setId(caseEntity.getKey().getId());
         caseBean.setTitle(getNullSafeString(caseEntity.getProperty("title")));
         caseBean.setOwner(getNullSafeString(caseEntity.getProperty("owner")));
         caseBean.setDateCreated((Date) caseEntity.getProperty("dateCreated"));
         caseBean.setDateClosed((Date) caseEntity.getProperty("dateClosed"));
-
-        //caseBean.setStatus((CaseBean.CaseStatus) caseEntity.getProperty("status").toString());
         caseBean.setStatus(getNullSafeString(caseEntity.getProperty("status")));
         caseBean.setComments(getNullSafeString(caseEntity.getProperty("comments")));
         caseBean.setLatitude((Double) caseEntity.getProperty("latitude"));
         caseBean.setLongitude((Double) caseEntity.getProperty("longitude"));
-//        GeoPt geoPt = new GeoPt((Float) caseEntity.getProperty("latitude"), (Float) caseEntity.getProperty("longitude"));
-//        caseBean.setGeoPt(geoPt);
 
 
         return caseBean;

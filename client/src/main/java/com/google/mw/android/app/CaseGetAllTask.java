@@ -61,20 +61,22 @@ public class CaseGetAllTask extends AsyncTask<String, Integer, Integer>{
 		publishProgress( 25 );
 
 		/* Call the Cloud Endpoint service */
-		try {			
+		try {
+
+            //TODO: Add the code to retrieve cases from the Cloud Endpoint
+            //TODO: TRIM for the student start package
 			List<CaseBean> cases = mCaseApi.getAllCases().execute().getItems();        			
-			Log.d(TAG, "Unfiltered(" + String.valueOf(cases.size()) + "): "+cases.toString());
+
+
+            Log.d(TAG, "Unfiltered(" + String.valueOf(cases.size()) + "): "+cases.toString());
 			
 			// Check incoming data for null pointers to avoid exceptions
 			for (int i = 0; i < cases.size(); i++) {
+                //pre-load the close date, if user clicks "close date" on screen...
+                //
 				if (cases.get(i).getDateClosed() == null)
 					cases.get(i).setDateClosed(new DateTime(new Date(), TimeZone.getTimeZone("UTC")));
-				if (cases.get(i).getDateCreated() == null)
-					cases.get(i).setDateCreated(new DateTime(new Date(), TimeZone.getTimeZone("UTC")));
-				if (cases.get(i).getStatus() == null)
-					cases.get(i).setStatus("CLOSED");
-				if (cases.get(i).getOwner() == null)
-					cases.get(i).setOwner("");
+
 			}
 			
 			// Filter by owner and assign to Main.array

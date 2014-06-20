@@ -60,10 +60,13 @@ public class CaseUpdateTask extends AsyncTask<String, Integer, Integer>{
 		/* Calls the Cloud Endpoint service */
 		try {
 			Log.d(TAG, mBean.toString());
+
+            //TODO: add the code to send the case to Cloud Endpoint
+            //TODO: TRIM for the student start package
 			mCaseApi.updateCase(mBean).execute();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		

@@ -42,7 +42,7 @@ public class Main extends Activity {
 	private final String TAG = getClass().getSimpleName();
 		
 	
-	
+	//TODO: Set this to your name. Sandi will preload some cases for you!
 	public static String Owner = "Rafa";
 		
 	// Widgets
@@ -106,8 +106,10 @@ public class Main extends Activity {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         receiver = new NetworkReceiver();
         this.registerReceiver(receiver, filter);
-      
+
+        //TODO: Add the code to connect to the Cloud Endpoint
         // Create HTTP connection to Cloud Endpoint
+        //TODO: TRIM for the student start package
         CaseApi.Builder builder = new CaseApi.Builder(
 				  AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null);
 		mCaseApi = builder.setHttpRequestInitializer(new HttpRequestInitializer() {
