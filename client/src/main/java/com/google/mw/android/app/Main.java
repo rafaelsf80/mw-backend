@@ -26,6 +26,7 @@ import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.util.DateTime;
 import com.google.mw.android.app.CaseDetails.ICaseDetails;
 import com.google.mw.android.app.ListEntryAdapter.IAdapter;
+import com.google.mw.android.app.gcm.GcmClientTask;
 import com.google.mw.backend.caseApi.CaseApi;
 import com.google.mw.backend.caseApi.model.CaseBean;
 
@@ -43,7 +44,7 @@ public class Main extends Activity {
 		
 	
 	//TODO: Set this to your name. Sandi will preload some cases for you!
-	public static String Owner = "Rafa";
+	public static String Owner = "Matt";
 		
 	// Widgets
 	private ImageView imGoogleLogo;
@@ -98,7 +99,7 @@ public class Main extends Activity {
         array = new ArrayList<CaseBean>();
            
         // Launch Google Cloud Messaging
-        GcmClientTask gcmClient = new GcmClientTask();   
+        GcmClientTask gcmClient = new GcmClientTask();
         gcmClient.setContext(mContext);
         gcmClient.start();
              

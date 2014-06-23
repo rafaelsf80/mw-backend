@@ -1,4 +1,4 @@
-package com.google.mw.android.app;
+package com.google.mw.android.app.gcm;
 
 import android.app.ProgressDialog;
 import android.content.Context;

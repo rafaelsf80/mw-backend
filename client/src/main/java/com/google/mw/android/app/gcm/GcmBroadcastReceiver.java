@@ -1,4 +1,4 @@
-package com.google.mw.android.app;
+package com.google.mw.android.app.gcm;
 
 import android.app.Activity;
 import android.content.ComponentName;
